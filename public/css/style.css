@@ -1,0 +1,67 @@
+.info {margin:40px 0; min-height: 250px; border:#ccc solid 1px;  background: url(../img/05.jpg);}
+.art {width: 100%; height: 280px; margin: -30px 0 0 0; overflow: hidden; position: relative;}
+.over {width: 100%; height: 280px; margin: -30px 0 0 0;  background-color: red ;position: absolute; color:#fff; }
+.art i {position: absolute; top: 10px; left: 20px; color: #fff; opacity: 0.8;}
+.player {width: 100%; height: 120px; background-color: #eee; }
+.player_up {height: 60px;}
+.player_down {height: 10px;}
+.others {background-color: #fff;}
+.clear {clear: both;}
+.song {padding: 20px 0; border-bottom: #eee solid 1px;}
+.art img {width: 100%; height: auto; }
+.song_art img {width: 100%; height: auto; }
+.song p {font-size: 13px; margin: 2px 0 2px 0; padding: 0 0 0 0; }
+.song h2 {font-weight: 100; margin: 0 0 0 0; padding: 0 0 0 0;}
+.song h3 {margin: 0 0 0 0; padding: 0 0 0 0;}
+.info_ii p {font-size: 14px; margin: 2px 0 2px 0; padding: 0 0 0 0; }
+.info_ii h2 {font-weight: 100; margin: 0 0 0 0; padding: 0 0 0 0;}
+.info_ii h3 {margin: 0 0 0 0; padding: 0 0 0 0;}
+.player_up h2 {font-weight: 100; margin: 0 0 0 0; padding: 0 0 0 0;}
+.player_up h4 {margin: 0 0 0 0; padding: 0 0 0 0;}
+.info_i {background-color: rgba(0,0,0,0.5); width: 100%; height: 250px; margin: 0 0 0 0; padding: 40px;}
+.info_ii {padding: 20px 0px; }
+.pp {padding-left: 0; padding-right: 0; margin: 0;}	
+.jp-audio {width: 100%; padding: 10px;}
+.jp-play {  }
+.pl {font-size: 150px;}  
+.dl {font-size: 20px; color: #ccc; margin: -20px 5px; position: relative;}
+.jp-repeat {font-size: 20px; color: #ccc; margin: 0 5px;}
+.jp-repeat:focus {font-size: 50px}
+.bb {text-align: right;}
+.jp-volume-bar {
+  
+  overflow: hidden;
+  background: red;
+  top: 5px;
+  left: 22px;
+  width: 46px;
+  height: 5px;
+  cursor: pointer; }
+
+.jp-volume-bar-value {
+  background: black;
+  width: 0px;
+  height: 5px; }
+
+  .jp-seek-bar {
+  background: red;
+  width: 0px;
+  height: 100%;
+  cursor: pointer; }
+
+.jp-play-bar {
+  background: black;
+  width: 0px;
+  height: 100%; }
+
+   .jp-progress {
+  top: 0px;
+  left: 50px;
+  width: 90%;
+  margin: 0 auto 0 auto;
+  height: 10px; }
+
+  .jp-current-time {position: absolute; left: 0; margin: -5px 0 0 0;}
+  .jp-duration {position: absolute;  right: 0; margin: -15px 0 0 0;}
+  @media (max-width: 992px) { .dis {display: none;}}
+  .jp-time-holder {margin: -20px 0 0 0;}
