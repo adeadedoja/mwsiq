@@ -9,7 +9,7 @@
     <link rel="icon" href="../../favicon.ico">
     
 
-    <title>Mwsiq</title>
+    <title>@if(isset($title)) {{$title}} @else Mwsiq @endif</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrapyeti.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -44,13 +44,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand bl" href="/">{!! HTML::image('img/logo.fw.png') !!}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/song">Songs</a></li>
+            <li><a href="/artist">Artists</a></li>
+            <li><a href="/genre">Genres</a></li>
+            <li><a href="/playlist">Playlists</a></li>
+            <li><a href="/playlist">Blog</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -65,10 +68,17 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            <li><a href="{{URL::to('http://www.facebook.com/MWSIQCOM')}}"><i class="icon-facebook col"></i></a></li>
+            <li><a href="{{URL::to('http://www.twitter.com/mwsiqe')}}"><i class="icon-twitter col"></i></a></li>
+            <li><a href="../navbar/"><i class="icon-youtube col"></i></a></li>
+            <li><a href="../navbar/"><i class="icon-tumblr col"></i></a></li>
+            <li><a href="../navbar/"><i class="icon-google-plus col"></i></a></li>
           </ul>
+          
+          {!!Form::open(array('url' => '/search'))!!}
+             {!!Form::text('keyword', null, array('class' => 'form-control', 'placeholder' => 'Search Mwsiq.com here')) !!}
+             <i class="icon-search sea" role="button" tabindex="0"></i>
+          {!!Form::close()!!}
         </div><!--/.nav-collapse -->
       </div>
     </nav>

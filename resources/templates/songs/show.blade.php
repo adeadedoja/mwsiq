@@ -56,17 +56,20 @@ $(document).ready(function(){
 		<div class="col-md-4 col-xs-6">
 
 			<div class="art">
-				<i class="icon-play-circle jp-play pl" role="button" tabindex="0"></i>
-				<i class="icon-pause jp-pause pl" role="button" tabindex="0"></i>
-				<img src="../../img/j.jpg" /></div>
+				
+				<a class="song_art"><img src="../../img/j.jpg" /></a>
+				<a class="as"><i class="icon-play-circle jp-play pl" role="button" tabindex="0"></i>	<i class="icon-pause jp-pause pl" role="button" tabindex="0"></i></a>
+
+			</div>				
 		</div>
 		<div class="col-md-5 col-xs-6">
 			<div class="info_ii">
-									<b><p>SONG | {{$song->genre}}</p>
+									<b><p class="col">SONG | {{$song->genre}}</p>
 				   					<h3>{{$song->artist}}</h3>
 				   					<h2>{{$song->title}}</h2>
-				   					<p>Featuring: Name Of Artist</p>
+				   					@if($song->producer)
 				   					<p>Producer: {{$song->producer}} </p>
+				   					@endif
 				   					<p>Uploaded:{{$song->created_at}} </p>
 				   					<p>Plays: {{$song->playcount}} | Downloads: {{$song->dlcount}}</p></b>
 				   					<i class="jp-controls">
@@ -75,7 +78,7 @@ $(document).ready(function(){
 									
 									</i>
 									<i class="icon-stop jp-stop dl" role="button" tabindex="0"></i>
-					   					<i class="icon-download dl"></i>
+					   					<a href="/download/{{ $song->slug }}"><i class="icon-download dl"></i></a>
 					   					<i class="icon-star-empty dl"></i>
 					   					<i class="jp-toggles">
 											<i class="icon-repeat jp-repeat" role="button" tabindex="0"></i>
@@ -84,7 +87,13 @@ $(document).ready(function(){
 		</div>
 		<div class="col-md-3 pp col-xs-12">
 			<div class="info_i">
-				<a href="#" class="btn btn-info">Info</a>
+				<a href="/download/{{ $song->slug }}" class="btn btn-info btn-block"><i class="icon-download-alt"></i> Download Song</a>
+				<a href="/artist/{{ $song->artist }}" class="btn btn-danger btn-block"><i class="icon-list-ul"></i> View Other Songs by {{$song->artist}}</a>
+				<a href="/artist/{{ $song->artist }}" class="btn btn-warning btn-block"><i class="icon-user"></i> {{$song->artist}} artist page </a>
+				@if($song->lyrics)
+				<a href="/lyrics/{{ $song->slug }}" class="btn btn-success btn-block"><i class="icon-file-text-alt"></i> View Song Lyrics</a>
+				@endif
+				
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -108,150 +117,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				<!--End of Player-->	
-
-	{{$song->title}}
-	<div class="others">
-		<div class="col-md-8 pp">
-			<div class="l1">
-				<div class="panel panel-default">
-				  <div class="panel-heading">Other Songs on Mwsiq.com</div>
-				  <div class="panel-body">
-				   		<!--loop start-->
-				   		@for($i = 0; $i <=5; $i ++)
-				   			<div class="song">
-				   				<div class="col-xs-4">
-				   					<div class="song_art"><img src="../../img/j.jpg" /></div>
-				   				</div>
-				   				<div class="col-xs-8">
-				   					<p>SONG | GENRE</p>
-				   					<h3>Artist Name</h3>
-				   					<h2>Title Of Song</h2>
-				   					<p>Featuring: Name Of Artist</p>
-				   					<p>Producer: </p>
-				   					<p>Uploaded: </p>
-				   					<p>Plays: 4000 | Downloads: 6900</p>
-				   				</div>
-				   				<div class="clear"></div>
-				   			</div>
-				   		@endfor	
-				   		<!-- loop end-->
-				  </div>
-				</div>
-
-
-			</div>
-		</div>
-		<div class="col-md-4 pp">
-			<div class="r1">
-						<div class="panel panel-default">
-						  <div class="panel-heading">From The Blog </div>
-						  <div class="panel-body">
-						   		<!--loop start-->
-						   		@for($i = 0; $i <=4; $i ++)
-						   			<div class="song">
-						   				<div class="col-xs-4">
-						   					<div class="song_art"><img src="../../img/j.jpg" /></div>
-						   				</div>
-						   				<div class="col-xs-8">
-						   					<p>SONG | GENRE</p>
-						   					<h3>Artist Name</h3>
-						   					<h2>Title Of Song</h2>
-						   					<p>Featuring: Name Of Artist</p>
-						   					<p>Producer: </p>
-						   					<p>Uploaded: </p>
-						   					<p>Plays: 4000 | Downloads: 6900</p>
-						   				</div>
-						   				<div class="clear"></div>
-						   			</div>
-						   		@endfor	
-						   		<!-- loop end-->
-						  </div>
-						</div>
-
-
-						<div class="panel panel-default">
-						  <div class="panel-heading">Like Us on Facebook </div>
-						  <div class="panel-body">
-						   		<!--loop start-->
-						   		@for($i = 0; $i <=1; $i ++)
-						   			<div class="song">
-						   				<div class="col-xs-4">
-						   					<div class="song_art"><img src="../../img/j.jpg" /></div>
-						   				</div>
-						   				<div class="col-xs-8">
-						   					<p>SONG | GENRE</p>
-						   					<h3>Artist Name</h3>
-						   					<h2>Title Of Song</h2>
-						   					<p>Featuring: Name Of Artist</p>
-						   					<p>Producer: </p>
-						   					<p>Uploaded: </p>
-						   					<p>Plays: 4000 | Downloads: 6900</p>
-						   				</div>
-						   				<div class="clear"></div>
-						   			</div>
-						   		@endfor	
-						   		<!-- loop end-->
-						  </div>
-						</div>
-
-						<div class="panel panel-default">
-						  <div class="panel-heading">Follow Us on Twitter</div>
-						  <div class="panel-body">
-						   		<!--loop start-->
-						   		@for($i = 0; $i <=1; $i ++)
-						   			<div class="song">
-						   				<div class="col-xs-4">
-						   					<div class="song_art"><img src="../../img/j.jpg" /></div>
-						   				</div>
-						   				<div class="col-xs-8">
-						   					<p>SONG | GENRE</p>
-						   					<h3>Artist Name</h3>
-						   					<h2>Title Of Song</h2>
-						   					<p>Featuring: Name Of Artist</p>
-						   					<p>Producer: </p>
-						   					<p>Uploaded: </p>
-						   					<p>Plays: 4000 | Downloads: 6900</p>
-						   				</div>
-						   				<div class="clear"></div>
-						   			</div>
-						   		@endfor	
-						   		<!-- loop end-->
-						  </div>
-						</div>
-
-
-
-			</div>
-		</div>	
-	</div>
-<div class="clear"></div>
-	<div class="panel panel-default">
-						  <div class="panel-heading"><i class="icon-bug"></i><i class="icon-warning-sign"></i> Submit a comment Below </div>
-						  <div class="panel-body">
-						   		<!--loop start-->
-						   		@for($i = 1; $i <=1; $i ++)
-						   			<div class="song">
-						   				<div class="col-xs-4">
-						   					<div class="song_art"><img src="../../img/j.jpg" /></div>
-						   				</div>
-						   				<div class="col-xs-8">
-						   					<p>SONG | GENRE</p>
-						   					<h3>Artist Name</h3>
-						   					<h2>Title Of Song</h2>
-						   					<p>Featuring: Name Of Artist</p>
-						   					<p>Producer: </p>
-						   					<p>Uploaded: </p>
-						   					<p>Plays: 4000 | Downloads: 6900</p>
-						   				</div>
-						   				<div class="clear"></div>
-						   			</div>
-						   		@endfor	
-						   		<!-- loop end-->
-						  </div>
-						</div>
-		
-
-
+@include('bottom');	
 
 
 

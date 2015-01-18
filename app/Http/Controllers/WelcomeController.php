@@ -30,6 +30,8 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
+		$file = public_path().'/1.mp3';
+	return Response::download($file, 'song.jpg');
 		return view('welcome');
 	}
 

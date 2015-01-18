@@ -21,6 +21,12 @@
             {!! Form::text('artist', null, ['class' => 'form-control']) !!}
           </div>
         </div>    
+         <div class="form-group">
+          <label for="inputTitle" class="col-lg-2 control-label">Album Art</label>
+          <div class="col-lg-10">
+            {!! Form::text('albumart', null, ['class' => 'form-control']) !!}
+          </div>
+        </div>    
         <div class="form-group">
           <label for="inputTitle" class="col-lg-2 control-label">Producer</label>
           <div class="col-lg-10">
@@ -62,6 +68,12 @@
           <div class="col-lg-10">
             {!! Form::textarea('videodesc', null, ['class' => 'form-control']) !!}
           </div>
+        </div>      
+        <div class="form-group">
+          <label for="inputTitle" class="col-lg-2 control-label">Lyrics</label>
+          <div class="col-lg-10">
+            {!! Form::textarea('lyrics', null, ['class' => 'form-control']) !!}
+          </div>
         </div>    
         <div class="form-group">
           <label for="" class="col-lg-2 control-label"></label>
@@ -74,5 +86,6 @@
         </fieldset>
     {!! Form::close() !!}
 
-
+    {!! delete_form(['song.destroy', $song->slug]) !!}
+   
 @stop
