@@ -3,6 +3,7 @@
 use App\Playlist;
 use App\Play;
 use App\Song;
+use App\wp_post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,10 +16,11 @@ class PlaylistsController extends Controller {
 	 */
 	public function index()
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$playlists = Playlist::orderBy('id', 'DESC')->paginate(10);
 		$info = 'badoo';
 		$title = 'Playlists on Mwsiq.com';
-		return view('playlists.index', compact('playlists', 'info', 'title'));
+		return view('playlists.index', compact('playlists', 'info', 'title', 'items'));
 	}
 
 	/**
@@ -68,6 +70,7 @@ class PlaylistsController extends Controller {
 	public function show($slug)
 	{
 		//
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$playlist = Playlist::whereSlug($slug)->first();
 		$play = Play::wherePlaylist($slug)->get(); 
 		$songs = Song::get();
@@ -75,7 +78,7 @@ class PlaylistsController extends Controller {
 		$latsongs = Song::orderBy('id', 'DESC')->take(20)->get();
 		$latsongs->shuffle();
 		$title = $playlist->name.' playlist on Mwsiq.com';
-		return view ('playlists.show', compact('playlist','songs','latsongs','title','count' ));
+		return view ('playlists.show', compact('playlist','songs','latsongs','title','count','items' ));
 	}
 
 	public function addSongsToPlaylist(Request $request){

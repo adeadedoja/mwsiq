@@ -63,6 +63,17 @@ return [
 			'prefix'    => '',
 		],
 
+		'mysql2' => [
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'times',
+			'username'  => 'root',
+			'password'  => '',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		],
+
 		'pgsql' => [
 			'driver'   => 'pgsql',
 			'host'      => env('DB_HOST') ?: 'localhost',

@@ -2,6 +2,7 @@
 
 use App\Genre;
 use App\Song;
+use App\wp_post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,10 +15,11 @@ class GenresController extends Controller {
 	 */
 	public function index()
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$genres = Genre::orderBy('id', 'ASC')->paginate(10);
 		$info = 'badoo';
 		$title = 'Genres on Mwsiq.com';
-		return view('genres.index', compact('genres', 'info', 'title'));
+		return view('genres.index', compact('genres', 'info', 'title', 'items'));
 	}
 
 	/**
@@ -53,13 +55,14 @@ class GenresController extends Controller {
 	public function show($slug)
 	{
 		//
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$genre = Genre::whereSlug($slug)->first(); 
 		$songs = Song::whereGenre($slug)->get();
 		$count = $songs->count();
 		$latsongs = Song::orderBy('id', 'DESC')->take(20)->get();
 		$latsongs->shuffle();
 		$title = $genre->name.' songs on Mwsiq.com';
-		return view ('genres.show', compact('genre','songs','latsongs', 'title', 'count'));
+		return view ('genres.show', compact('genre','songs','latsongs', 'title', 'count', 'items'));
 	}
 
 	/**

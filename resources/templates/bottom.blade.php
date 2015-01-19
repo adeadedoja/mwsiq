@@ -1,6 +1,24 @@
 <div class="others">
 		<div class="col-md-8 pp">
 			<div class="l1">
+			<?php
+			if (Request::is('song/*'))
+				{
+				  ?>
+				  @if($song->video)
+				<div class="panel panel-default">
+					<div class="panel-heading"><i class="icon-music coli"></i> Music Video for {{$song->title}}</div>
+					  <div class="panel-body">
+					   		<!--loop start-->
+					   		{!!$song->video!!}
+					   		<!-- loop end-->
+					   		{{$song->description}}
+					  </div>
+				</div>
+				@endif
+				  <?php
+				}
+			?>	
 				<div class="panel panel-default">
 				<div class="panel-heading"><i class="icon-music coli"></i>  Other Songs on Mwsiq.com</div>
 				  <div class="panel-body">
@@ -21,7 +39,7 @@
 
 			</div>
 		</div>
-		@include('side');	
+		@include('side', array('items' => $items))
 	</div>
 <div class="clear"></div>
 	<div class="panel panel-default">

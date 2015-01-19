@@ -24,7 +24,7 @@
 
 			</div>
 		</div>
-		@include('side')
+		@include('side', array('items' => $items))
 	</div>
 <div class="clear"></div>
 

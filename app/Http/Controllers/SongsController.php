@@ -2,6 +2,7 @@
 
 use App\Song;
 use App\Artist;
+use App\wp_post;
 use App\Genre;
 use App\Subscriber;
 use Illuminate\Http\Request;
@@ -37,44 +38,55 @@ class SongsController extends Controller {
 	 */
 	public function index()
 	{
-		
+		#$url = 'http://blog.mwsiq.com/feed';
+		#$rss = simplexml_load_file($url);
+		#$items = [];
+		#for ($i=0; $i < 5 ; $i++) { 
+		#$items[$i] = $rss->channel->item[$i];
+		#}
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$songs = Song::orderBy('id', 'DESC')->paginate(10);
 		$title = 'Songs on Mwsiq.com';
-		return view('songs.index', compact('songs', 'title'));
+		return view('songs.index', compact('songs', 'title','items'));
 	}
 
 	public function home()
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$songs = Song::orderBy('id', 'DESC')->get();
 		$trendings = Song::orderBy('id', 'DESC')->take(20)->get();
 		$trendings->sortByDesc('playcount');
-		return view('home', compact('songs', 'info', 'trendings'));
+		return view('home', compact('songs', 'info', 'trendings', 'items'));
 	}
+	
 
 	public function show($slug)
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$song = Song::whereSlug($slug)->first(); 
 		$song->increment('playcount');
 		$latsongs = Song::orderBy('id', 'DESC')->take(20)->get();
 		$latsongs->shuffle();
 		$title = 'Play | Download '.$song->title.' by '.$song->artist;
-		return view ('songs.show', compact('song','latsongs', 'title'));
+		return view ('songs.show', compact('song','latsongs', 'title', 'items'));
 	}
 
 	public function lyrics($slug)
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$song = Song::whereSlug($slug)->first(); 
 		$latsongs = Song::orderBy('id', 'DESC')->take(20)->get();
 		$latsongs->shuffle();
 		$title = 'Lyrics for '.$song->title;
-		return view ('songs.lyrics', compact('song','latsongs', 'title'));
+		return view ('songs.lyrics', compact('song','latsongs', 'title', 'items'));
 	}
 
 	public function search(Request $request){
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$keyword = $request->keyword;
 		$songs = Song::where('title', 'LIKE', '%'.$keyword.'%')->orWhere('artist', 'LIKE', '%'.$keyword.'%')->get();
 		$title = 'Search for '.$keyword.' on Mwsiq.com';
-		return view('songs.search', compact('songs', 'keyword','title'));
+		return view('songs.search', compact('songs', 'keyword','title','items'));
 	}
 	public function create() {
 		$artists = Artist::orderBy('name', 'ASC')->lists('name', 'slug');
@@ -103,18 +115,20 @@ class SongsController extends Controller {
 	}
 
 	public function mail(Request $request, Subscriber $subscriber){
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$songs = Song::orderBy('id', 'DESC')->get();
 		$trendings = Song::orderBy('id', 'DESC')->take(20)->get();
 		$trendings->sortByDesc('playcount');
 		 $subscriber->create($request->all());
 		 $greeting = 'Thanks for subscribing';
-		return view('home', compact('greeting','songs', 'info', 'trendings'));
+		return view('home', compact('greeting','songs', 'info', 'trendings', 'items'));
 	}
 
 	public function edit($slug)
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$song = Song::whereSlug($slug)->first(); 
-		return view ('songs.edit', compact('song'));
+		return view ('songs.edit', compact('song','items'));
 	}
 
 	public function update($slug, Request $request)

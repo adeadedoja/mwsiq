@@ -2,6 +2,7 @@
 
 use App\Artist;
 use App\Song;
+use App\wp_post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,10 +15,11 @@ class ArtistsController extends Controller {
 	 */
 	public function index()
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$artists = Artist::orderBy('name', 'ASC')->paginate(10);
 		$info = 'badoo';
 		$title = 'Artists on Mwsiq.com';
-		return view('artists.index', compact('artists', 'info', 'title'));
+		return view('artists.index', compact('artists', 'info', 'title', 'items'));
 	}
 
 	/**
@@ -51,13 +53,14 @@ class ArtistsController extends Controller {
 	 */
 	public function show($slug)
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$artist = Artist::whereSlug($slug)->first(); 
 		$songs = Song::whereArtist($slug)->get();
 		$count = $songs->count();
 		$latsongs = Song::orderBy('id', 'DESC')->take(20)->get();
 		$latsongs->shuffle();
 		$title = 'Biography and Songs by '.$artist->name;
-		return view ('artists.show', compact('artist', 'latsongs', 'songs', 'title', 'count'));
+		return view ('artists.show', compact('artist', 'latsongs', 'songs', 'title', 'count', 'items'));
 	}
 
 	/**
@@ -80,9 +83,10 @@ class ArtistsController extends Controller {
 	 */
 	public function update($slug, Request $request)
 	{
+		$items = wp_post::where('post_type', '=', 'post')->orderBy('id', 'DESC')->paginate(5);
 		$artist = Artist::whereSlug($slug)->first(); 
 		$artist->fill($request->input())->save();
-		return redirect('artist');  
+		return redirect('artist','items');  
 	}
 
 	/**
